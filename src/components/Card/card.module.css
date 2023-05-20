@@ -1,0 +1,19 @@
+.container {
+    text-align: center;
+}
+
+.title{
+    font-weight: bold;
+    margin-bottom: 0.1rem;
+}
+
+.year{
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+}
+
+.image {
+  width: 100%;
+  border-radius: 5px;
+  height: 80%;
+}
