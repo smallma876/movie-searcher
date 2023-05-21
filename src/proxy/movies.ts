@@ -2,7 +2,7 @@ import { MOCK_MOVIES } from "./mocks/movies.mock";
 import { Movie, MoviesResponse } from "../domain/movies";
 
 const API_KEY = "4bd2a545";
-const URL_DOMAIN = "http://www.omdbapi.com/";
+const URL_DOMAIN = "https://www.omdbapi.com/";
 
 const mapperMovies = (moviesResponse: MoviesResponse): Movie[] => {
   const { Search: moviesSearched } = moviesResponse;
