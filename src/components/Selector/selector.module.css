@@ -1,0 +1,11 @@
+.selector {
+  height: 2rem;
+  padding: 0.2rem;
+  width: 100%;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+.selector:focus {
+  outline: 0;
+}

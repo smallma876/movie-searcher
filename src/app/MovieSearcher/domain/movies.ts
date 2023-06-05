@@ -17,3 +17,8 @@ export interface MovieResponse {
   imdbID: string;
   Type: string;
 }
+
+export enum Order {
+  ASCENDANT = "A",
+  DESCENDANT = "D",
+}

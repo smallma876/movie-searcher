@@ -1,5 +1,4 @@
-import { MOCK_MOVIES } from "./mocks/movies.mock";
-import { Movie, MovieResponse, MoviesResponse } from "../domain/movies";
+import { Movie, MoviesResponse } from "../domain/movies";
 
 const API_KEY = "4bd2a545";
 const URL_DOMAIN = "https://www.omdbapi.com/";

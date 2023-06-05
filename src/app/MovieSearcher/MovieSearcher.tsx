@@ -2,14 +2,16 @@ import { useEffect, useState } from "react";
 import styles from "./movie-searcher.module.css";
 import TextField from "../../components/TextField/TextField";
 import ButtonPrimary from "../../components/ButtonPrimary/ButtonPrimary";
-import { apiMovies } from "../../proxy/movies";
-import { Movie } from "../../domain/movies";
+import { Movie, Order } from "./domain/movies";
 import Card from "../../components/Card/Card";
 import { useDebounce } from "../../hooks/use-debounce";
+import { apiActions } from "./actions/movie-actions";
+import Selector from "../../components/Selector/Selector";
 
 const MovieSearcher = () => {
   const [movies, setMovies] = useState<Movie[] | null>(null);
   const [query, setQuery] = useState("");
+  const [orderMovies, setOrderMovies] = useState(Order.ASCENDANT);
   const debouncer = useDebounce(query);
 
   const onChange = (value: string) => {
@@ -17,18 +19,31 @@ const MovieSearcher = () => {
   };
 
   useEffect(() => {
-    if (query.length > 3) {
-      apiMovies
-        .getMovies(query as string)
-        .then((result) => {
-          setMovies(result);
-        })
-        .catch((error) => console.log(error));
-    }
+    const getMovies = async () => {
+      if (query.length > 3) {
+        const result = await apiActions.getMovies(query, orderMovies);
+        setMovies(result);
+      }
+    };
+
+    getMovies();
   }, [debouncer]);
 
+  useEffect(() => {
+    if (movies) {
+      const tempMovies = [...movies];
+      tempMovies.sort((a, b) => {
+        if (orderMovies === Order.DESCENDANT) {
+          return b.title.localeCompare(a.title);
+        }
+        return a.title.localeCompare(b.title);
+      });
+      setMovies(tempMovies);
+    }
+  }, [orderMovies]);
+
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       <section>
         <form>
           <div className={styles.searcherGroup}>
@@ -40,6 +55,13 @@ const MovieSearcher = () => {
               value={query}
             />
             <ButtonPrimary id="buttonSearcher" label="Buscar" type="button" />
+            <Selector
+              value={orderMovies}
+              onChange={(e) => setOrderMovies(e.target.value as Order)}
+            >
+              <option value={Order.ASCENDANT}>Ascendente</option>
+              <option value={Order.DESCENDANT}>Descendente</option>
+            </Selector>
           </div>
         </form>
       </section>
@@ -54,7 +76,7 @@ const MovieSearcher = () => {
         ))}
         {movies?.length === 0 ? <span>Prueba otra busqueda</span> : null}
       </section>
-    </div>
+    </main>
   );
 };
 
