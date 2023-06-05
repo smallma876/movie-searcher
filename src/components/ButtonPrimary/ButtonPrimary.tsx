@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const ButtonPrimary: FC<Props> = ({ id, label, ...rest }) => {
   return (
-    <button className={styles.button} type="submit" id={id} {...rest}>
+    <button className={styles.button} id={id} {...rest}>
       {label}
     </button>
   );

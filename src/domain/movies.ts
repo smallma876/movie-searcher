@@ -5,9 +5,9 @@ export interface Movie {
 }
 
 export interface MoviesResponse {
-  Search: MovieResponse[];
-  totalResults: string;
   Response: string;
+  Search: MovieResponse[];
+  totalResults?: string;
 }
 
 export interface MovieResponse {

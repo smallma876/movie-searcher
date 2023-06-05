@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "homepage": "https://smallma876.github.io/movie-searcher/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -b master -d build",
