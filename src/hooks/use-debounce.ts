@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useDebugValue, useEffect, useState } from "react";
 
 export const useDebounce = (query: string) => {
+  useDebugValue(query);
   const [debouncer, setDebouncer] = useState("");
 
   useEffect(() => {
